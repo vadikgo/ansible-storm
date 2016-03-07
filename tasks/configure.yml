@@ -46,10 +46,10 @@
     - Restart Nimbus
     - Restart Supervisor
 
-- include: configure_nimbus.yml tags=storm_nimbus
+- include: configure_nimbus.yml
   when: storm_nimbus_enabled
 
-- include: configure_supervisor.yml tags=storm_supervisor
+- include: configure_supervisor.yml
   when: storm_supervisor_enabled
 
 - meta: flush_handlers
