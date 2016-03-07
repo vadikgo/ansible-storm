@@ -1,3 +1,7 @@
+- command: java -version
+  register: java_version
+  ignore_errors: True
+
 - name: Install yum OpenJDK
   yum: name=java-1.7.0-openjdk state=present
-  when: not skip_install
+  when: java_version|failed
