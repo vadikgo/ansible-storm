@@ -11,5 +11,5 @@
   when: verify
 
 - name: wait for ui port
-  wait_for: port={{storm_ui_port}} state=started timeout={{ monasca_wait_for_period }}
+  wait_for: host={{storm_ui_host}} port={{storm_ui_port}} state=started timeout={{ monasca_wait_for_period }}
   when: storm_ui_enabled and verify
