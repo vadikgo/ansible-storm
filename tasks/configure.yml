@@ -40,7 +40,8 @@
 - set_fact: use_systemd=False
   when: init.stdout != 'systemd'
 
-- file: path={{storm_root_dir}}/apache-storm-{{storm_version}}/logback state=directory recurse=yes owner={{storm_user}} group={{storm_group}}
+- name: Create Storm logback directory
+  file: path={{storm_root_dir}}/apache-storm-{{storm_version}}/logback state=directory owner={{storm_user}} group={{storm_group}} mode=755
 
 - name: Configure cluster.xml for setting log level
   template: dest="{{storm_root_dir}}/apache-storm-{{storm_version}}/logback/cluster.xml" owner={{storm_user}} group={{storm_group}} mode=644 src=cluster.xml.j2
