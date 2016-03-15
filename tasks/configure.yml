@@ -35,6 +35,8 @@
 - name: Detect if this is a systemd based system
   command: cat /proc/1/comm
   register: init
+  ignore_errors: yes
+
 - set_fact: use_systemd=True
   when: init.stdout == 'systemd'
 - set_fact: use_systemd=False
