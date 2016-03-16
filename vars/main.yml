@@ -9,4 +9,6 @@ supervisor_systemd_service: /etc/systemd/system/storm-supervisor.service
 supervisor_upstart_conf: /etc/init/storm-supervisor.conf
 logviewer_systemd_service: /etc/systemd/system/storm-logviewer.service
 logviewer_upstart_conf: /etc/init/storm-logviewer.conf
+drpc_systemd_service: /etc/systemd/system/storm-drpc.service
+drpc_upstart_conf: /etc/init/storm-drpc.conf
 storm_user: storm

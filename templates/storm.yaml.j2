@@ -54,6 +54,10 @@ ui.port: {{storm_ui_port}}
 {% for key, value in storm_drpc_extra_config|dictsort %}
 {{key}}: {{value}}
 {% endfor %}
+drpc.servers:
+{% for srv in storm_drpc_servers %}
+      - "{{srv}}"
+{% endfor%}
 {% endif %}
 
 ### transactional.* configs

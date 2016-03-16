@@ -1,6 +1,8 @@
 ---
 apache_mirror: http://apache.mirrors.tds.net
 nimbus_thrift_port: 6627
+storm_drpc_servers:
+storm_drpc_port: 3772
 storm_drpc_extra_config:
 storm_local_dir: /var/storm
 storm_java_library_path: "/usr/local/lib:/opt/local/lib:/usr/lib"

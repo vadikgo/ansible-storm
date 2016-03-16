@@ -51,6 +51,9 @@
     - Restart Nimbus
     - Restart Supervisor
 
+- include: configure_drpc.yml
+  when: (ansible_host in storm_drpc_servers) or (ansible_hostname in storm_drpc_servers)
+
 - include: configure_nimbus.yml
   when: storm_nimbus_enabled
 

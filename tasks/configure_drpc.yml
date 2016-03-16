@@ -1,0 +1,22 @@
+---
+- name: Set Default limit for number of user's processes
+  lineinfile:
+      dest: /etc/security/limits.d/90-nproc.conf
+      state: present
+      regexp: '^\*\s+soft\s+nproc\s+1024$'
+      line: "*          soft    nproc     131072"
+
+- name: Setup Storm drpc upstart script
+  copy: dest={{drpc_upstart_conf}} owner=root group=root mode=644 src=storm-drpc.conf
+  notify:
+    - Restart Supervisor
+  when: not use_systemd
+
+- name: Setup Storm drpc systemd script
+  copy: dest={{supervisor_systemd_service}} owner=root group=root mode=644 src=storm-drpc.service
+  notify:
+    - Restart Supervisor
+  when: use_systemd
+
+- command: systemctl daemon-reload
+  when: use_systemd

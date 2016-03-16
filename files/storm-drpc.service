@@ -1,0 +1,14 @@
+[Unit]
+Description=Storm drpc daemon
+After=storm-drpc.service zookeeper.service
+
+[Service]
+Type=simple
+User=storm
+Group=storm
+Restart=on-failure
+WorkingDirectory=/opt/storm/current
+ExecStart=/opt/storm/current/bin/storm drpc
+
+[Install]
+WantedBy=multi-user.target

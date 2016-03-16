@@ -1,0 +1,3 @@
+---
+- name: Stop drpc
+  service: name=storm-drpc state=stopped enabled=yes

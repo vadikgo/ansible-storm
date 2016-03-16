@@ -4,3 +4,6 @@
 
 - include: start_supervisor.yml
   when: storm_supervisor_enabled
+
+- include: start_drpc.yml
+  when: (ansible_host in storm_drpc_servers) or (ansible_hostname in storm_drpc_servers)

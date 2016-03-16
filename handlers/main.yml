@@ -1,4 +1,8 @@
 ---
+- name: Restart drpc
+  service: name=storm-drpc state=restarted
+  when: (ansible_host in storm_drpc_servers) or (ansible_hostname in storm_drpc_servers) | bool and run_mode == 'Deploy'
+
 - name: Restart Nimbus
   service: name=storm-nimbus state=restarted
   when: storm_nimbus_enabled | bool and run_mode == 'Deploy'
