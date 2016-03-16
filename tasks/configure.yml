@@ -33,9 +33,9 @@
   when: not storm_logs_dir.stat.exists
 
 - name: Detect if this is a systemd based system
-  command: cat /proc/1/comm
+  #shell: "[ -e /proc/1/comm ] && cat /proc/1/comm"
+  shell: pidof systemd && echo "systemd" || echo "other"
   register: init
-  ignore_errors: yes
 
 - set_fact: use_systemd=True
   when: init.stdout == 'systemd'
