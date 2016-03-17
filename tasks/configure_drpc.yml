@@ -1,10 +1,15 @@
 ---
-- name: Set Default limit for number of user's processes
+- name: Unset default limit for number of user's processes
   lineinfile:
       dest: /etc/security/limits.d/90-nproc.conf
-      state: present
       regexp: '^\*\s+soft\s+nproc\s+1024$'
+      state: absent
+
+- name: Set new limit for number of user's processes
+  lineinfile:
+      dest: /etc/security/limits.d/90-nproc.conf
       line: "*          soft    nproc     131072"
+      create: yes
 
 - name: Setup Storm drpc upstart script
   copy: dest={{drpc_upstart_conf}} owner=root group=root mode=644 src=storm-drpc.conf
