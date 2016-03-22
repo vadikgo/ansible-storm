@@ -44,3 +44,5 @@ monasca_wait_for_period: 120
 run_mode: Deploy
 skip_install: False
 verify: True
+zookeeper_hosts:
+    - "{{ansible_hostname}}"

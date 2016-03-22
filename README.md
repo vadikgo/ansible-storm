@@ -10,7 +10,7 @@ If `storm_ui_enabled` is set to True the UI is installed on the same box as nimb
 
 The variable are required for proper setup
 - nimbus_host
-- zookeeper_hosts - List of dict (i.e. {zookeeper_hosts:[{host:,id:},{host:,id:},...]}), any specified port is ignored 2181 is used.
+- zookeeper_hosts - List (i.e. {zookeeper_hosts:[host , host,...]}), any specified port is ignored 2181 is used.
 - storm_cluster_logback_xml - the path to the local copy of a custom logback configuration file (you can copy it to the machine in a pre-task) to override the default storm logging with. If this variable is omitted, the default storm logback config will be used.
 
 ## Optional
