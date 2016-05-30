@@ -28,7 +28,7 @@ storm_ui_host: 127.0.0.1
 storm_ui_extra_config:
     ui.childopts: "-Xmx768m"
 storm_worker_extra_config:
-    worker.childopts: "-Xmx1280m -XX:+UseConcMarkSweepGC -Dcom.sun.management.jmxremote -Djdk.tls.legacyAlgorithms='K_NULL, C_NULL, M_NULL,DHE_DSS_EXPORT, DHE_RSA_EXPORT, DH_anon_EXPORT, DH_DSS_EXPORT,DH_RSA_EXPORT, RSA_EXPORT,DH_anon, ECDH_anon,RC4_128, RC4_40, DES_CBC, DES40_CBC, SSL_RSA_WITH_RC4_128_MD5'"
+    worker.childopts: "-Xmx1280m -XX:+UseConcMarkSweepGC -Dcom.sun.management.jmxremote"
 storm_worker_ports: [6701, 6702, 6703, 6704]
 storm_zookeeper_extra_config:
     storm.zookeeper.port:  "{{ storm_zookeeper_port }}"
