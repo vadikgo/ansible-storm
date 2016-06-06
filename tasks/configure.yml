@@ -35,6 +35,10 @@
 
 - name: Create Storm log symlink to {{storm_log_dir}} if directory does not exist
   file: path={{storm_root_dir}}/current/logs state=link src={{storm_log_dir}} force=yes
+  notify:
+    - Restart Nimbus
+    - Restart Supervisor
+
 
 - name: Detect if this is a systemd based system
   #shell: "[ -e /proc/1/comm ] && cat /proc/1/comm"
