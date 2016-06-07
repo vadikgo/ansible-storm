@@ -4,6 +4,11 @@
   notify:
     - Restart Supervisor
 
+- name: Create storm-env.sh file
+  template: src=storm-env.sh.j2 dest={{storm_root_dir}}/apache-storm-{{storm_version}}/conf/storm-env.sh mode=754 owner={{storm_user}} group={{storm_group}}
+  notify:
+    - Restart Supervisor
+
 - name: Setup Storm supervisor upstart script
   copy: dest={{supervisor_upstart_conf}} owner=root group=root mode=644 src=storm-supervisor.conf
   notify:
