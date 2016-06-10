@@ -6,7 +6,7 @@
   user: name={{storm_user}} system=yes group={{storm_group}}
 
 - name: Set system limits
-  lineinfile: dest=/etc/security/limits.conf line="{{storm_user}} soft nproc 8192\n{{storm_user}} hard nofile 16384"
+  lineinfile: dest=/etc/security/limits.conf line="{{storm_user}} soft nofile 8192\n{{storm_user}} hard nofile 16384"
 
 - name: Create Storm root directory
   file: path={{storm_root_dir}} state=directory owner={{storm_user}} group={{storm_group}} mode=755
