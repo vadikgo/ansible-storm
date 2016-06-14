@@ -62,6 +62,12 @@
     - Restart Nimbus
     - Restart Supervisor
 
+- name: Configure worker.xml for setting log4j2
+  template: dest="{{storm_root_dir}}/apache-storm-{{storm_version}}/log4j2/worker.xml" owner={{storm_user}} group={{storm_group}} mode=644 src=worker.xml.j2
+  notify:
+    - Restart Nimbus
+    - Restart Supervisor
+
 - include: configure_drpc.yml
   when: (ansible_host in storm_drpc_servers) or (ansible_hostname in storm_drpc_servers)
 
