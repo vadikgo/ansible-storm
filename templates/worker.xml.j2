@@ -59,11 +59,14 @@
         protocol="UDP" appName="[${sys:storm.id}:${sys:worker.port}]" mdcId="mdc" includeMDC="true"
         facility="LOCAL5" enterpriseNumber="18060" newLine="true" exceptionPattern="%rEx{full}"
         messageId="[${sys:user.name}:${sys:logging.sensitivity}]" id="storm"/>
+    <Socket name="logstash" host="{{hostvars[groups['logstash'][0]]['ansible_host']}}" port="7000" immediateFlush="false">
+        <SerializedLayout />
+    </Socket>
 </appenders>
 <loggers>
     <root level="DEBUG"> <!-- We log everything -->
         <appender-ref ref="A1"/>
-        <appender-ref ref="syslog"/>
+        <appender-ref ref="logstash"/>
     </root>
     <Logger name="STDERR" level="INFO">
         <appender-ref ref="STDERR"/>
