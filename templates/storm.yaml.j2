@@ -61,15 +61,15 @@ drpc.servers:
 {% endif %}
 
 ### transactional.* configs
-transactional.zookeeper.servers:
-{% for host in zookeeper_hosts %}
-    - "{{host}}"
-{% endfor %}
-{% if storm_transactional_extra_config.items is defined %}
-{% for key, value in storm_transactional_extra_config|dictsort %}
-{{key}}: {{value}}
-{% endfor %}
-{% endif %}
+#transactional.zookeeper.servers:
+#{% for host in zookeeper_hosts %}
+#   - "{{host}}"
+#{% endfor %}
+#{% if storm_transactional_extra_config.items is defined %}
+#{% for key, value in storm_transactional_extra_config|dictsort %}
+#{{key}}: {{value}}
+#{% endfor %}
+#{% endif %}
 
 ### topology.* configs are for specific executing storms
 {% if storm_topology_extra_config.items is defined %}
