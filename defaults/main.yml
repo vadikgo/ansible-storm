@@ -28,7 +28,7 @@ storm_ui_host: 127.0.0.1
 storm_ui_extra_config:
     ui.childopts: "-Xmx768m"
 storm_worker_extra_config:
-    worker.childopts: "-Xmx4096m –XX:+UseG1GC -Dcom.sun.management.jmxremote"
+    worker.childopts: "-Xmx4096m -XX:+UseG1GC -Dcom.sun.management.jmxremote"
 storm_worker_ports: [6701]
 storm_zookeeper_extra_config:
     storm.zookeeper.port:  "{{ storm_zookeeper_port }}"
