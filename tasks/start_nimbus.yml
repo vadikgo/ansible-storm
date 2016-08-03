@@ -1,10 +1,23 @@
 ---
-- name: Enable and Start Nimbus
-  service: name=storm-nimbus state=started enabled=yes
+- block:
+  - name: Enable and Start Nimbus
+    service: name=storm-nimbus state=started enabled=yes
+  - name: Enable and Start Storm UI
+    service: name=storm-ui state=started enabled=yes
+    when: storm_ui_enabled
+  when: ansible_connection != 'docker'
 
-- name: Enable and Start Storm UI
-  service: name=storm-ui state=started enabled=yes
-  when: storm_ui_enabled
+- block:
+  - name: Start Nimbus in docker
+    become: yes
+    become_user: storm
+    shell: "/opt/storm/current/bin/storm nimbus &"
+  - name: Start Storm UI in docker
+    become: yes
+    become_user: storm
+    shell: "/opt/storm/current/bin/storm ui &"
+    when: storm_ui_enabled
+  when: ansible_connection == 'docker'
 
 - name: wait for nimbus port
   wait_for: port={{nimbus_thrift_port}} state=started timeout={{ monasca_wait_for_period }}

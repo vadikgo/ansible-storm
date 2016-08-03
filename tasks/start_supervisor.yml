@@ -1,7 +1,20 @@
 ---
-- name: Enable and Start Storm Supervisor
-  service: name=storm-supervisor state=started enabled=yes
+- block:
+  - name: Enable and Start Storm Supervisor
+    service: name=storm-supervisor state=started enabled=yes
 
-- name: Enable and Start Storm Logviewer
-  service: name=storm-logviewer state=started enabled=yes
-  when: storm_logviewer_enabled
+  - name: Enable and Start Storm Logviewer
+    service: name=storm-logviewer state=started enabled=yes
+    when: storm_logviewer_enabled
+  when: ansible_connection != 'docker'
+
+- block:
+  - name: Start Storm Supervisor in docker
+    become: yes
+    become_user: storm
+    shell: "/opt/storm/current/bin/storm supervisor &"
+  - name: Start Storm Logviewer in docker
+    become: yes
+    become_user: storm
+    shell: "/opt/storm/current/bin/storm logviewer &"
+  when: ansible_connection == 'docker'

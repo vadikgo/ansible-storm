@@ -47,3 +47,4 @@ skip_install: False
 verify: True
 zookeeper_hosts:
     - "{{ansible_hostname}}"
+storm_logstash_host:

@@ -41,6 +41,11 @@
   notify:
     - Restart Nimbus
     - Restart Supervisor
+  when: ansible_connection != 'docker'
+
+- name: Create Storm log symlink to {{storm_log_dir}} if directory does not exist
+  file: path={{storm_root_dir}}/current/logs state=link src={{storm_log_dir}} force=yes
+  when: ansible_connection == 'docker'
 
 
 - name: Detect if this is a systemd based system
@@ -61,12 +66,22 @@
   notify:
     - Restart Nimbus
     - Restart Supervisor
+  when: ansible_connection != 'docker'
+
+- name: Configure cluster.xml for setting log level
+  template: dest="{{storm_root_dir}}/apache-storm-{{storm_version}}/logback/cluster.xml" owner={{storm_user}} group={{storm_group}} mode=644 src=cluster.xml.j2
+  when: ansible_connection == 'docker'
 
 - name: Configure worker.xml for setting log4j2
   template: dest="{{storm_root_dir}}/apache-storm-{{storm_version}}/log4j2/worker.xml" owner={{storm_user}} group={{storm_group}} mode=644 src=worker.xml.j2
   notify:
     - Restart Nimbus
     - Restart Supervisor
+  when: ansible_connection != 'docker'
+
+- name: Configure worker.xml for setting log4j2
+  template: dest="{{storm_root_dir}}/apache-storm-{{storm_version}}/log4j2/worker.xml" owner={{storm_user}} group={{storm_group}} mode=644 src=worker.xml.j2
+  when: ansible_connection == 'docker'
 
 - include: configure_drpc.yml
   when: (ansible_host in storm_drpc_servers) or (ansible_hostname in storm_drpc_servers)

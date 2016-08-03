@@ -1,6 +1,11 @@
 ---
 - name: Enable and Start drpc
   service: name=storm-drpc state=started enabled=yes
+  when: ansible_connection != 'docker'
+
+- name: Start drpc in docker
+  shell: "/opt/storm/current/bin/storm drpc &"
+  when: ansible_connection == 'docker'
 
 - name: wait for drpc port
   wait_for: port={{storm_drpc_port}} state=started timeout={{ monasca_wait_for_period }}
